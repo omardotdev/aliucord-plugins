@@ -54,8 +54,7 @@ subprojects {
 
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions {
-                jvmTarget = "11" // Required
-                // Disables some unnecessary features
+                jvmTarget = "11"
                 freeCompilerArgs = freeCompilerArgs +
                         "-Xno-call-assertions" +
                         "-Xno-param-assertions" +
