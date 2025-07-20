@@ -1,4 +1,4 @@
-version = "1.0.0"
+version = "1.0.1"
 description = "sends a random picture of minky :3 (zt64's cat)"
 
 aliucord {
