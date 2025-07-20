@@ -5,17 +5,13 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        // Aliucords Maven repo which contains our tools and dependencies
         maven("https://maven.aliucord.com/snapshots")
-        // Shitpack which still contains some Aliucord dependencies for now. TODO: Remove
         maven("https://jitpack.io")
     }
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.4")
-        // Aliucord gradle plugin which makes everything work and builds plugins
         classpath("com.aliucord:gradle:main-SNAPSHOT")
-        // Kotlin support. Remove if you want to use Java
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
     }
 }
@@ -35,14 +31,12 @@ fun Project.android(configuration: BaseExtension.() -> Unit) = extensions.getByN
 subprojects {
     apply(plugin = "com.android.library")
     apply(plugin = "com.aliucord.gradle")
-    // Remove if using Java
     apply(plugin = "kotlin-android")
 
-    // Fill out with your info
     aliucord {
-        author("DISCORD USERNAME", 123456789L)
-        updateUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/updater.json")
-        buildUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/%s.zip")
+        author("omardotdev", 1135918173959491595)
+        updateUrl.set("https://raw.githubusercontent.com/omardotdev/aliucord-plugins/builds/updater.json")
+        buildUrl.set("https://raw.githubusercontent.com/omardotdev/aliucord-plugins/builds/%s.zip")
     }
 
     android {
@@ -74,7 +68,6 @@ subprojects {
         val discord by configurations
         val implementation by configurations
 
-        // Stubs for all Discord classes
         discord("com.discord:discord:aliucord-SNAPSHOT")
         implementation("com.aliucord:Aliucord:main-SNAPSHOT")
 
