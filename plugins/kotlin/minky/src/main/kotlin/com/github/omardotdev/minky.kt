@@ -25,7 +25,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 @AliucordPlugin
-class PetPet : Plugin() {
+class Minky : Plugin() {
     override fun start(context: Context) {
         commands.registerCommand(
             "minky",
