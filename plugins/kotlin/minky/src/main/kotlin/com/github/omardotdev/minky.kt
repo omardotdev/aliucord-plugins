@@ -3,7 +3,7 @@
  * Copyright (C) 2025 Omar
  *
  * This plugin was taken from Wolfkid200444 and modfiied.
- * The original plugin's name is petoet
+ * The original plugin's name is petpet
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
