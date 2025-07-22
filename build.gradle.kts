@@ -34,7 +34,7 @@ subprojects {
     apply(plugin = "kotlin-android")
 
     aliucord {
-        author("omardotdev", 1135918173959491595)
+        author("omardotdev", 1135918173959491595L)
         updateUrl.set("https://raw.githubusercontent.com/omardotdev/aliucord-plugins/builds/updater.json")
         buildUrl.set("https://raw.githubusercontent.com/omardotdev/aliucord-plugins/builds/%s.zip")
     }
