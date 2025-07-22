@@ -1,5 +1,5 @@
-version = "1.0.0"
-description = "sends a random picture of vennie :3 (aliucord mascot)"
+version = "1.0.1"
+description = "sends a random picture of vennie :3 (vencord mascot)"
 
 aliucord {
     changelog.set("""

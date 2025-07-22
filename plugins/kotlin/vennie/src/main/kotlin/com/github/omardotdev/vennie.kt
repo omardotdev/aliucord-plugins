@@ -36,7 +36,7 @@ class Vennie : Plugin() {
 	    var res = Http.simpleJsonGet(api_url, ApiResponse::class.java)
 	    var api_id = res.id
             if (ctx.containsArg("id")) {
-                var id = ctx.getStringOrDefault("id", "none")
+                var id = ctx.getStringOrDefault("id", "")
 		var file = getImage(id, c)
 		ctx.addAttachment(Uri.fromFile(file).toString(), "vennie-$id.jpg")
 		CommandResult("")
@@ -49,12 +49,7 @@ class Vennie : Plugin() {
     }
    
     private fun getImage(id: String, mContext: Context): File {
-	var url = "https://votd.vennie.moe"
-	if (id == "none") {
-		url = "https://votd.vennie.moe"
-	} else {
-		url = "https://votd.vennie.moe/image/$id"
-	}
+	var url = "https://votd.vennie.moe/image/$id"
         val res = Http.Request(url).execute()
         val file = File.createTempFile("temp", ".jpg", mContext.cacheDir)
         FileOutputStream(file).use { fos -> res.pipe(fos) }
