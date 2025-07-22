@@ -1,7 +1,8 @@
 rootProject.name = "aliucord-plugins"
 
 include(
-    "minky"
+    "minky",
+    "vennie"
 )
 
 rootProject.children.forEach {
