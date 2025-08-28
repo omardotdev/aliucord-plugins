@@ -21,11 +21,11 @@ import android.view.View
 @AliucordPlugin
 class HideGiftButton : Plugin() {
     override fun start(c: Context) {
-	patcher.after<`FlexInputFragment$d`>("invoke", Any::class.java) {
-		val fragment = this.receiver as FlexInputFragment
-		val binding = fragment.j() ?: return@after
-		binding.m.visibility = View.GONE
-	}
+		patcher.after<`FlexInputFragment$d`>("invoke", Any::class.java) {
+			val fragment = this.receiver as FlexInputFragment
+			val binding = fragment.j() ?: return@after
+			binding.m.visibility = View.GONE
+		}
     }
 
     override fun stop(context: Context) {
