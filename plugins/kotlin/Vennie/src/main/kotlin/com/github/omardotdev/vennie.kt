@@ -37,19 +37,19 @@ class Vennie : Plugin() {
 	    var api_id = res.id
             if (ctx.containsArg("id")) {
                 var id = ctx.getStringOrDefault("id", "")
-		var file = getImage(id, c)
-		ctx.addAttachment(Uri.fromFile(file).toString(), "vennie-$id.jpg")
-		CommandResult("")
+				var file = getImage(id, c)
+				ctx.addAttachment(Uri.fromFile(file).toString(), "vennie-$id.jpg")
+				CommandResult("")
             } else {
-		var file = getImage(api_id, c)
-		ctx.addAttachment(Uri.fromFile(file).toString(), "vennie.jpg")
-		CommandResult("")
+				var file = getImage(api_id, c)
+				ctx.addAttachment(Uri.fromFile(file).toString(), "vennie.jpg")
+				CommandResult("")
             }
         }
     }
    
     private fun getImage(id: String, mContext: Context): File {
-	var url = "https://votd.vennie.moe/image/$id"
+		var url = "https://votd.vennie.moe/image/$id"
         val res = Http.Request(url).execute()
         val file = File.createTempFile("temp", ".jpg", mContext.cacheDir)
         FileOutputStream(file).use { fos -> res.pipe(fos) }
