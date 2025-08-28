@@ -27,7 +27,7 @@ import java.io.FileOutputStream
 class Minky : Plugin() {
     override fun start(c: Context) {
         commands.registerCommand("minky", "Send an image of Minky") 
-	{ ctx: CommandContext ->
+		{ ctx: CommandContext ->
             var file = getImage(c)
             ctx.addAttachment(Uri.fromFile(file).toString(), "minky.jpg")
             CommandResult("")
@@ -35,7 +35,7 @@ class Minky : Plugin() {
     }
 
     private fun getImage(c: Context): File {
-	var url = "https://minky.materii.dev"
+		var url = "https://minky.materii.dev"
         val res = Http.Request(url).execute()
         val file = File.createTempFile("temp", ".jpg", c.cacheDir)
         FileOutputStream(file).use { fos -> res.pipe(fos) }
