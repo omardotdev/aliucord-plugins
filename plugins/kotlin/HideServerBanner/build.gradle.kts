@@ -1,5 +1,5 @@
 version = "1.0.0"
-description = "Hides the Gift button in chat"
+description = "Hides the server banner from the channel list"
 
 aliucord {
     changelog.set("""
