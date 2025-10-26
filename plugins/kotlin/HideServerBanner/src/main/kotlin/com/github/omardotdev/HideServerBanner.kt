@@ -23,20 +23,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 @AliucordPlugin
 class HideServerBanner : Plugin() {
     override fun start(c: Context) {
-        // The code is a bit horror, but it works :|
-        patcher.after<WidgetChannelsList>("onViewBound", View::class.java) { (_, view: View) ->
-            // Generates view id for the FrameLayout
-            val layoutId = View.generateViewId()
-
-            // Gets the parent of the FrameLayout (which has the channel banner), applies the view id and removes the channel banner
-            view.findViewById<CollapsingToolbarLayout>(Utils.getResId("collapsing_toolbar", "id"))
-                .getChildAt(0).apply { id = layoutId }
-            val container = view.findViewById<FrameLayout>(Utils.getResId("$layoutId", "id"))
-            container.removeViewAt(0)
-
-            // Remove the weird background
-            container.getChildAt(0).apply { setBackgroundColor(0x00000000) }
-        }
+        // Removes banner off guild profile and channels list
+        patcher.instead<com.discord.models.guild.Guild>("getBanner") { null }
     }
 
     override fun stop(context: Context) {
