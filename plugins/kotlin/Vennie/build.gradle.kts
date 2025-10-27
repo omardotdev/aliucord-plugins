@@ -1,9 +1,9 @@
-version = "1.0.2"
+version = "1.0.3"
 description = "sends a random picture of vennie :3 (vencord mascot)"
 
 aliucord {
     changelog.set("""
-        adjust name
+        improvments to the code
     """.trimIndent())
 
     excludeFromUpdaterJson.set(false)

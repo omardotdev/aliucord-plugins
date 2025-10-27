@@ -8,18 +8,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0
 */
 
-package com.minky.minky
+package com.github.omardotdev
 
 import android.content.Context
 import android.net.Uri
 import com.aliucord.Http
-import com.aliucord.Main
-import com.aliucord.Utils.createCommandOption
 import com.aliucord.annotations.AliucordPlugin
 import com.aliucord.api.CommandsAPI.CommandResult
 import com.aliucord.entities.CommandContext
 import com.aliucord.entities.Plugin
-import com.discord.api.commands.ApplicationCommandType
 import java.io.File
 import java.io.FileOutputStream
 
@@ -28,14 +25,14 @@ class Minky : Plugin() {
     override fun start(c: Context) {
         commands.registerCommand("minky", "Send an image of Minky") 
 		{ ctx: CommandContext ->
-            var file = getImage(c)
+            val file = getImage(c)
             ctx.addAttachment(Uri.fromFile(file).toString(), "minky.jpg")
             CommandResult("")
         }
     }
 
     private fun getImage(c: Context): File {
-		var url = "https://minky.materii.dev"
+		val url = "https://minky.materii.dev"
         val res = Http.Request(url).execute()
         val file = File.createTempFile("temp", ".jpg", c.cacheDir)
         FileOutputStream(file).use { fos -> res.pipe(fos) }
