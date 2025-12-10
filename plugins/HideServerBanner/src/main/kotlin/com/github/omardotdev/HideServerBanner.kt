@@ -18,7 +18,7 @@ import com.discord.models.guild.Guild
 
 @AliucordPlugin
 class HideServerBanner : Plugin() {
-    override fun start(c: Context) {
+    override fun start(context: Context) {
         // Removes banner off guild profile and channels list
         patcher.instead<Guild>("getBanner") { null }
     }

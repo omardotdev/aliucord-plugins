@@ -25,7 +25,7 @@ import com.vennie.vennieapi.ApiResponse
 
 @AliucordPlugin
 class Vennie : Plugin() {
-    override fun start(c: Context) {
+    override fun start(context: Context) {
         commands.registerCommand(
             "vennie", "Send a random picture of Vennie :) (changes per day)", listOf(
                 Utils.createCommandOption(ApplicationCommandType.STRING, "id", "Image ID (e.g 30)")
@@ -35,20 +35,18 @@ class Vennie : Plugin() {
 
             if (ctx.containsArg("id")) {
                 val id = ctx.getStringOrDefault("id", "")
-                val file = getImage(id, c)
-                ctx.addAttachment(Uri.fromFile(file).toString(), "vennie-$id.jpg")
+                ctx.addAttachment(Uri.fromFile(getImage(id, context)).toString(), "vennie-$id.jpg")
                 CommandResult("")
             } else {
-                val file = getImage(json.id, c)
-                ctx.addAttachment(Uri.fromFile(file).toString(), "vennie.jpg")
+                ctx.addAttachment(Uri.fromFile(getImage(json.id, context)).toString(), "vennie.jpg")
                 CommandResult("")
             }
         }
     }
 
-    private fun getImage(id: String, mContext: Context): File {
+    private fun getImage(id: String, context: Context): File {
         val res = Http.Request("https://votd.vennie.moe/image/$id").execute()
-        val file = File.createTempFile("temp", ".jpg", mContext.cacheDir)
+        val file = File.createTempFile("temp", ".jpg", context.cacheDir)
         FileOutputStream(file).use { fos -> res.pipe(fos) }
         file.deleteOnExit()
         return file

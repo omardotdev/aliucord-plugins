@@ -5,6 +5,4 @@ aliucord {
     changelog.set("""
         some fixes
     """.trimIndent())
-
-    excludeFromUpdaterJson.set(false)
 }

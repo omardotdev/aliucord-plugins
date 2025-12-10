@@ -1,11 +1,36 @@
-rootProject.name = "aliucord-plugins"
+@file:Suppress("UnstableApiUsage")
 
-include(
-    "Minky",
-    "Vennie",
-    "HideServerBanner"
-)
-
-rootProject.children.forEach {
-    it.projectDir = file("plugins/kotlin/${it.name}")
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        maven {
+            name = "aliucord"
+            url = uri("https://maven.aliucord.com/releases")
+        }
+    }
 }
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            name = "aliucord"
+            url = uri("https://maven.aliucord.com/releases")
+        }
+        maven {
+            name = "aliucord"
+            url = uri("https://maven.aliucord.com/snapshots")
+        }
+    }
+}
+
+rootProject.name = "aliucord-plugins"
+include(":plugins")
+
+// Add each directory under ./plugins as a separate project
+rootDir.resolve("plugins")
+    .listFiles { file -> file.isDirectory && file.resolve("build.gradle.kts").exists() }!!
+    .forEach { include(":plugins:${it.name}") }

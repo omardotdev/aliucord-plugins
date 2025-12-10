@@ -1,0 +1,58 @@
+name: "Deploy"
+
+concurrency:
+  group: "deploy"
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write   # allow pushing back to the repo with GITHUB_TOKEN
+
+jobs:
+  deploy:
+    name: Build & Deploy Plugins
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v5
+        with:
+          path: "src"
+
+      - name: Checkout builds branch
+        uses: actions/checkout@v5
+        with:
+          ref: "builds"
+          path: "builds"
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: 21
+          distribution: temurin
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE/src
+          chmod +x ./gradlew
+          ./gradlew make :generateUpdaterJson
+    
+          rm -f $GITHUB_WORKSPACE/builds/*.zip
+          cp $GITHUB_WORKSPACE/src/plugins/*/build/outputs/*.zip $GITHUB_WORKSPACE/builds/
+          cp $GITHUB_WORKSPACE/src/build/outputs/updater.json $GITHUB_WORKSPACE/builds/
+
+      - name: Push builds branch
+        run: |
+          cd $GITHUB_WORKSPACE/builds
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Build $GITHUB_SHA" || exit 0   # skip if nothing new
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:builds

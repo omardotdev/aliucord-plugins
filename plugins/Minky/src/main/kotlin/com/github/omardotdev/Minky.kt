@@ -22,11 +22,10 @@ import java.io.FileOutputStream
 
 @AliucordPlugin
 class Minky : Plugin() {
-    override fun start(c: Context) {
+    override fun start(context: Context) {
         commands.registerCommand("minky", "Send an image of Minky") 
 		{ ctx: CommandContext ->
-            val file = getImage(c)
-            ctx.addAttachment(Uri.fromFile(file).toString(), "minky.jpg")
+            ctx.addAttachment(Uri.fromFile(getImage(context)).toString(), "minky.jpg")
             CommandResult("")
         }
     }
