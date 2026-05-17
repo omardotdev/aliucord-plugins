@@ -25,7 +25,9 @@ class DisablePiglinCyborgs : Plugin() {
             "PowerMode",
             "OnboardingFix",
             "AvatarResizer",
-            "PasswordLogin"
+            "PasswordLogin",
+            "FullscreenLock",
+            "BetterUserDetails"
         )
 
         for (piglin in piglins) {
